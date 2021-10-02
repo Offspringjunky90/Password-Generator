@@ -10,63 +10,139 @@ let confirmLowerCase;
 let confirmNumbers;
 let confirmSymbols;
 let passwordCharacters = [];
-let randomPassword = "";
+var options = generatePasswordOptions();
+
 
 
 // Write password to the #password input
-function generatePassword() {
+window.onload = alert("Please click 'Generate Password' to begin");
+
+function generatePasswordOptions() {
   let confirmLength = prompt("How many characters would you like your password to be?");
 
-  while(confirmLength <= 8 || confirmLength >= 128) {
-      alert("Length must be 8-128 characters. How many characters would you like your password to be?");
-      confirmLength = prompt("How many characters would you like your password to contain?");
-      } 
+  if (confirmLength < 8 || confirmLength > 128) {
+  alert("Length must be 8-128 characters. How many characters would you like your password to be?");
+  return;
+  }
 
-      let confirmUpperCase = confirm("Would you like to use uppercase letters?");
-      let confirmLowerCase = confirm("Would you like to use lowercase letters?");
-      let confirmNumbers = confirm("Would you like to use numbers?");    
-      let confirmSymbols = confirm("Would you like to use special characters?");
+  confirmUpperCase = confirm("Would you like to use uppercase letters?");
+  confirmLowerCase = confirm("Would you like to use lowercase letters?");
+  confirmNumbers = confirm("Would you like to use numbers?");
+  confirmSymbols = confirm("Would you like to use special characters?");
 
-      while(confirmUpperCase === false && confirmLowerCase === false && confirmSymbols === false && confirmNumbers === false) {
-        alert("Please select at least one character");
-        confirmUpperCase = confirm("Would you like to use uppercase letters?");   
-        confirmLowerCase = confirm("Would you like to use lowercase letters?");
-        confirmNumbers = confirm("Would you like to use numbers?");    
-        confirmSymbols = confirm("Would you like to use special characters?");
-    } 
+  if (!confirmUpperCase && !confirmLowerCase && !confirmNumbers && !confirmSymbols) {
+  alert("Please select at least one character");
+  return;
+  }
 
+  var passwordOptions = {
+    confirmLength,
+    passwordUpperCase: confirmUpperCase,
+    passwordLowerCase: confirmLowerCase,
+    passwordNumbers: confirmNumbers,
+    passwordSymbols: confirmSymbols,
+  }
 
-    if (confirmUpperCase) {
-      passwordCharacters = passwordCharacters.concat(passwordUpperCase)
-    }
-
-    if (confirmLowerCase) {
-      passwordCharacters = passwordCharacters.concat(passwordLowerCase)
-    }
-
-    if (confirmNumbers) {
-      passwordCharacters = passwordCharacters.concat(passwordNumbers)
-    }
-      
-    if (confirmSymbols) {
-      passwordCharacters = passwordCharacters.concat(passwordSymbols)
-    }
-
-console.log(passwordCharacters)
-      
-  for (var i = 0; i < confirmLength; i++) {
-        randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
-        console.log(randomPassword)
-      }
-      return randomPassword;
+  return passwordOptions;
 }
+
+function generatePassword () {
+  var options = generatePasswordOptions();
+  console.log(options);
+
+  passwordArray = [];
+  console.log(passwordArray);
+
+  if (options.passwordUpperCase) {
+    for (i = 0; i < passwordUpperCase.length; i++) {
+      passwordArray.push(passwordUpperCase[i]);
+    }
+  }
+  if (options.passwordLowerCase) {
+    for (i = 0; i < passwordlowerCase.length; i++) {
+      passwordArray.push(passwordLowerCase[i]);
+    }
+  }
+  if (options.passwordNumbers) {
+    for (i = 0; i < passwordNumbers.length; i++) {
+      passwordArray.push(passwordNumbers[i]);
+    }
+  }
+  if (options.passwordSymbols) {
+    for (i = 0; i < passwordSymbols.length; i++) {
+      passwordArray.push(passwordSymbols[i]);
+    }
+  }
+}
+
+var finalPassword = [];
+
+for (let i = 0; i < options.length; i++) {
+  var randomPasswordPick = Math.floor(Math.random() * Math.floor(passwordArray.length));
+  finalPassword.push(passwordArray[randomPasswordPick])
+}
+
+console.log(finalPassword);
+
+var finalFinalPassword =finalPassword.join("");
 
 // Add event listener to generate button
-function writePassword() {
-  password = generatePassword();
-  alert(password)
-}
+generateBtn.addEventListener("click", function() {
+ // let pH = document.querySelector("#password");
+  generatePasswordOptions();
+  document.getElementById("placeholder").textContent = finalFinalPassword;
+});
 
-function writePassword() {
-  password = document.getElementById
-}
+
+
+
+
+
+
+
+
+
+
+// alert("Please select at least one character");
+    //confirmUpperCase = confirm("Would you like to use uppercase letters?");   
+    //confirmLowerCase = confirm("Would you like to use lowercase letters?");
+    //confirmNumbers = confirm("Would you like to use numbers?");    
+    //confirmSymbols = confirm("Would you like to use special characters?");
+     
+  //if (confirmLength < 8 || confirmLength > 128) {
+    //    alert("Length must be 8-128 characters. How many characters would you like your password to be?");
+     // confirmLength = prompt("How many characters would you like your password to contain?");
+     // confirmUpperCase = confirm("Would you like to use uppercase letters?");
+     // confirmLowerCase = confirm("Would you like to use lowercase letters?");
+     // confirmNumbers = confirm("Would you like to use numbers?");    
+     // confirmSymbols = confirm("Would you like to use special characters?");
+     // }
+//}
+
+  //  if (confirmUpperCase) {
+    //  passwordCharacters = passwordCharacters.concat(passwordUpperCase)
+    //}
+
+    //if (confirmLowerCase) {
+      //passwordCharacters = passwordCharacters.concat(passwordLowerCase)
+    //}
+
+    //if (confirmNumbers) {
+      //passwordCharacters = passwordCharacters.concat(passwordNumbers)
+    //}
+      
+    //if (confirmSymbols) {
+      //passwordCharacters = passwordCharacters.concat(passwordSymbols)
+    //}
+
+//console.log(passwordCharacters)
+      
+  //for (var i = 0; i < confirmLength; i++) {
+    //    randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
+        //console.log(randomPassword)
+      //}
+      //return randomPassword;
+   // }/
+
+
+  
